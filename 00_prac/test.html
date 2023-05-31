@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bss</title>
+</head>
+<script src="./jquery-1.12.4.js"></script>
+<script src="./jquery-3.4.1.min.js"></script>
+<script src="./sldParser.js"></script>
+<body>
+    <div><button type="button" id="readXML">readXML</button></div>
+    <div><button type="button" id="writeXML">writeXML</button></div>
+</body>
+
+<script>
+    window.onload = function() {
+        const btn = document.querySelectorAll('button');
+        btn.forEach((button) => {
+            button.addEventListener('click', function(e) {
+            clickBtn(e);
+        });
+        })
+    };
+    let style = {
+    layerNm : "tgd_li_popltn_cnt",
+    name : "li_popltn_cnt",
+    title : "li_popltn_cnt_jenks",
+    options : ["jenks"],
+    range : {
+                high : ["4944", "9931", "13306", "17734", "29728"],
+                low : ["3679", "4944", "9931", "13306", "17734"],
+                jenks : ["3679 - 4944", "4944 - 9931", "9931 - 13306", "13306 - 17734", "17734 - 29728"]
+            },
+    value : "all_popltn_cnt",
+    color : ["#f7fbff", "#c8dcf0", "#73b2d8", "#2979b9", "#08306b"]
+}
+    const sld = new sldParser();
+    function clickBtn(e) {
+        let id = e.target.id;
+        if (id == 'readXML') {
+            let type = 'string';
+            let test = sld.readOptions(style, type);
+            console.log(test);
+        }
+    }
+</script>
+
+
+</html>
